@@ -6,7 +6,7 @@
 /*   By: oallawa <oallawa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 15:12:29 by oallawa           #+#    #+#             */
-/*   Updated: 2024/07/06 17:58:13 by oallawa          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:47:13 by oallawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ int	stack_len(t_stack_node *stack)
 		stack = stack->next;
 	}
 	return (count);
+}
+
+void	sort_three(t_stack_node **a)
+{
+	t_stack_node	*biggest_node;
+
+	biggest_node = find_max(*a);
+	if (biggest_node == *a)
+		ra(a, false);
+	else if (biggest_node == (*a)->next)
+		rra(a, false);
+	if ((*a)->nbr-> (*a)->next->nbr)
+		sa(a, false);
 }
 
 static void	append_node(t_stack_node **stack, int n)
