@@ -25,6 +25,16 @@ bool	stack_sorted(t_stack_node *stack)
 	return (true);
 }
 
+t_stack_node	*find_last(t_stack_node *stack)
+{
+	if (!stack)
+		return (NULL);
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
+}
+
+
 int	stack_len(t_stack_node *stack)
 {
 	int	count;
@@ -40,62 +50,42 @@ int	stack_len(t_stack_node *stack)
 	return (count);
 }
 
-void	sort_three(t_stack_node **a)
+t_stack_node	*find_min(t_stack_node *stack)
 {
-	t_stack_node	*biggest_node;
-
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if (biggest_node == (*a)->next)
-		rra(a, false);
-	if ((*a)->nbr-> (*a)->next->nbr)
-		sa(a, false);
-}
-
-static void	append_node(t_stack_node **stack, int n)
-{
-	t_stack_node	*node;
-	t_stack_node	*current;
+	long			min;
+	t_stack_node	*min_node;
 
 	if (!stack)
-		return ;
-	node = malloc(sizeof(t_stack_node));
-	if (!node)
-		return ;
-	node->next = NULL;
-	node->nbr = n;
-	if (!(*stack))
+		return (NULL);
+	min = LONG_MAX;
+	while (stack)
 	{
-		*stack = node;
-	}
-	else
-	{
-		current = *stack;
-		while (current->next != NULL)
+		if (stack->nbr < min)
 		{
-			current = current->next;
+			min = stack->nbr;
+			min_node = stack;
 		}
-		current->next = node;
+		stack = stack->next;
 	}
+	return (min_node); 
 }
 
-void	init_stack_a(t_stack_node **a, char **argv)
+t_stack_node	*find_max(t_stack_node *stack)
 {
-	long	n;
-	int		i;
+	long			max;
+	t_stack_node	*max_node;
 
-	i = 0;
-	while (argv[i])
+	if (!stack)
+		return (NULL);
+	max = LONG_MIN;
+	while (stack)
 	{
-		if (error_syntax(argv[i]))
-			free_errors(a);
-		n = ft_atoi(argv[i]);
-		if (n > INT_MAX || n < INT_MIN)
-			free_errors(a);
-		if (error_duplicate(*a, (int)n))
-			free_errors(a);
-		append_node(a, (int)n);
-		i++;
+		if (stack->nbr > max)
+		{
+			max = stack->nbr;
+			max_node = stack;
+		}
+		stack = stack->next;
 	}
+	return (max_node);
 }
